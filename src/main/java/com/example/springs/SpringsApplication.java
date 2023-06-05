@@ -26,6 +26,7 @@ public class SpringsApplication {
     CommandLineRunner run(@Qualifier("userDetailsServiceImpl") UserService iUserService, IRoleRepository iRoleRepository, UserRepository iUserRepository, PasswordEncoder passwordEncoder) {
         return args ->
         {
+            if (iRoleRepository.count() > 0 && iUserRepository.count() > 0) return;
             iUserService.saveRole(new Role("ROLE_USER"));
             iUserService.saveRole(new Role("ROLE_ADMIN"));
             iUserService.saveRole(new Role("ROLE_SUPERADMIN"));
